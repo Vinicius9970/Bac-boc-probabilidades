@@ -1,93 +1,32 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bac Bo Probabilidades</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
       text-align: center;
-      padding: 20px;
-      background-color: #f0f0f0;
-    }
-    input {
-      width: 60px;
-      font-size: 20px;
-      text-align: center;
-      margin: 5px;
+      margin-top: 50px;
     }
     button {
       padding: 10px 20px;
       font-size: 18px;
-      margin-top: 20px;
-    }
-    .result {
-      margin-top: 30px;
-      font-size: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>Probabilidade Bac Bo</h1>
-  
-  <p>Digite os dados:</p>
-  
-  <div>
-    <label>Jogador:</label><br>
-    <input type="number" id="j1" min="1" max="6" />
-    <input type="number" id="j2" min="1" max="6" />
-  </div>
-  
-  <div>
-    <label>Banca:</label><br>
-    <input type="number" id="b1" min="1" max="6" />
-    <input type="number" id="b2" min="1" max="6" />
-  </div>
-  
-  <button onclick="calcular()">Calcular</button>
-  
-  <div class="result" id="resultado"></div>
+  <h1>Probabilidade no Bac Bo</h1>
+  <p>Clique abaixo para ver uma probabilidade aleatória:</p>
+  <button onclick="mostrarProbabilidade()">Ver probabilidade</button>
+  <p id="resultado"></p>
 
   <script>
-    function calcular() {
-      const j1 = parseInt(document.getElementById('j1').value);
-      const j2 = parseInt(document.getElementById('j2').value);
-      const b1 = parseInt(document.getElementById('b1').value);
-      const b2 = parseInt(document.getElementById('b2').value);
-
-      if ([j1, j2, b1, b2].some(v => isNaN(v) || v < 1 || v > 6)) {
-        document.getElementById('resultado').innerText = 'Por favor, insira todos os dados corretamente (1 a 6).';
-        return;
-      }
-
-      const somaJogador = j1 + j2;
-      const somaBanca = b1 + b2;
-
-      let jogadorVence = 0, bancaVence = 0, empate = 0;
-
-      for (let i = 1; i <= 6; i++) {
-        for (let j = 1; j <= 6; j++) {
-          const totalBanca = i + j;
-          if (somaJogador > totalBanca) jogadorVence++;
-          else if (somaJogador < totalBanca) bancaVence++;
-          else empate++;
-        }
-      }
-
-      const totalCasos = 36;
-      const pJogador = (jogadorVence / totalCasos * 100).toFixed(2);
-      const pBanca = (bancaVence / totalCasos * 100).toFixed(2);
-      const pEmpate = (empate / totalCasos * 100).toFixed(2);
-
-      document.getElementById('resultado').innerHTML = `
-        <strong>Soma Jogador:</strong> ${somaJogador}<br>
-        <strong>Probabilidades:</strong><br>
-        Jogador vence: ${pJogador}%<br>
-        Banca vence: ${pBanca}%<br>
-        Empate: ${pEmpate}%
-      `;
+    function mostrarProbabilidade() {
+      const resultados = ["Empate: 9,56%", "Jogador: 43,72%", "Casa: 46,72%"];
+      const escolhido = resultados[Math.floor(Math.random() * resultados.length)];
+      document.getElementById("resultado").innerText = "Resultado: " + escolhido;
     }
   </script>
 </body>
